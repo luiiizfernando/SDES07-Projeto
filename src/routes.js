@@ -5,7 +5,7 @@ import { dataBooks, searchDataBooks } from './services/dataProcessingService.js'
 
 const router = express.Router();
 
-// Rota para testar a conexão e popular o banco com livros
+// Route to populate the database with books from Google Books API
 router.get('/create-book', async (req, res) => {
   try {
     let booksFormated = await dataBooks();
@@ -15,13 +15,14 @@ router.get('/create-book', async (req, res) => {
   }
 });
 
-// Rota para popular o banco de dados com as listas do NYT
+// Route to populate the database with NYT lists from NYT Books API
 router.get("/create-lists", async (req, res) => {
   const nytLists = await fetchNytAllBestSellers();
   const lists = nytLists.results.filter(value => JSON.stringify(value) !== '{}');
   res.json(lists);
 });
 
+// Route to populate the database with the association of list from NYT Books API with books from Google Books API
 router.get("/create-books-list", async (req, res) => {
   const booksOfList = await fetchAllFromNytLists();
   res.json(booksOfList);

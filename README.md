@@ -1,4 +1,4 @@
-# Books App - Informações Iniciais
+# Bookworms - Informações Iniciais
 
 ## Iniciar o Projeto
 ```bash

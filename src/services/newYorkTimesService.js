@@ -1,7 +1,9 @@
 import fetch from 'node-fetch';
+import { config } from 'dotenv';
+config(); // Carrega as variáveis de ambiente
 
 const nytBaseUrl = 'https://api.nytimes.com/svc/books/v3';
-const nytApiKey = 'j7q5f0NhhO7eAVxTT2zC72zGlLwZN5Np'; // Como mascarar no commit?
+const nytApiKey = process.env.API_KEY;
 
 /**
  * Função para buscar a lista de Best Sellers na API do NYT

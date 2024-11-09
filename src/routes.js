@@ -12,7 +12,7 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 // Rota para testar a conexão e popular o banco com livros
-router.get('/create-book', async (req, res) => {
+router.post('/create-book', async (req, res) => {
   try {
     let booksFormated = await dataBooks();
     // booksFormated = arrayVerifier(booksFormated, 'isbn');
@@ -36,7 +36,7 @@ router.get('/create-book', async (req, res) => {
 });
 
 // Rota para popular o banco de dados com as listas do NYT
-router.get("/create-lists", async (req, res) => {
+router.post("/create-lists", async (req, res) => {
   const nytLists = await fetchNytAllBestSellers();
   const lists = nytLists.results.filter(value => JSON.stringify(value) !== '{}');
   const nytListsFormated = await Promise.all(lists.map(async list => {
@@ -54,7 +54,7 @@ router.get("/create-lists", async (req, res) => {
   res.json(nytListsFormated);
 });
 
-router.get("/create-books-list", async (req, res) => {
+router.post("/create-books-list", async (req, res) => {
   const booksOfList = await fetchAllFromNytLists();
   await Promise.all(booksOfList.map(async bookList => {
     try {
